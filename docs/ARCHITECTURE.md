@@ -2,7 +2,7 @@
 
 ## Current State
 
-Only the **data model** exists (see `DATA_MODEL.md`), built via Setup UI directly in a Salesforce Developer Edition org. **No Apex, no LWC, no triggers, no flows, no tests, and no source-controlled metadata exist yet.** Nothing in this document beyond the data model has been implemented — everything below is a **plan**, not a status report.
+The **data model** is complete in the org and in `force-app`. **Apex (WIP):** `PropertyController` — `getProperties` with `LIMIT 25` / `OFFSET` and a null/`< 1` page guard; `ping` still present. **LWC (WIP):** `propertyList` loads page 1 imperatively; HTML row-count binding not finished; not on an App Page yet. **No** create-with-image LWC, filters, triggers, flows, or tests.
 
 ## Guiding Principle
 

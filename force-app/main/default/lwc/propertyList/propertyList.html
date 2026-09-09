@@ -1,3 +1,34 @@
 <template>
-    <p>properties.length}</p>
+
+    <lightning-input type="number" label="Max rent" onchange={handlePriceChange}></lightning-input>
+    
+    <lightning-combobox
+        name="status"
+        label="Status"
+        placeholder="Choose Status"
+        value={availability}
+        options={statusOptions}
+        onchange={handleStatusChange}>
+    </lightning-combobox>
+    <lightning-combobox
+        name="furnishing_status"
+        label="Furnishing Status"
+        placeholder="Choose Furnishing"
+        value={furnishing}
+        options={furnishingStatusOptions}
+        onchange={handleFurnishingStatusChange}>
+    </lightning-combobox>
+
+    <p>{properties.length}</p>
+    
+    <lightning-datatable
+        data={properties}
+        columns={columns}
+        key-field="Id"
+        hide-checkbox-column="true">
+    </lightning-datatable>
+
+    <lightning-button label="Previous" onclick={handlePrevious}></lightning-button>
+    <lightning-button label="Next" onclick={handleNext}></lightning-button>
+
 </template>

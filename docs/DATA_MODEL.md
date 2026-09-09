@@ -4,7 +4,7 @@ Status: **✅ Complete.** All 5 objects, all fields, all relationships, and all 
 
 Every decision below is classified as:
 - **Confirmed** — reasoned through, implemented, and understood well enough to defend.
-- **Requires validation** — implemented, but worth Cursor re-testing understanding of, or reconsidering technically.
+- **Requires validation** — implemented, but worth re-testing understanding of, or reconsidering technically.
 - **Not yet decided** — genuinely open.
 
 ---
@@ -102,7 +102,7 @@ Every decision below is classified as:
 | Maintenance_Request__c → Property__c | Master-Detail | Property | N/A | **Confirmed.** No reason to preserve maintenance history if the property itself is gone. |
 | Maintenance_Request__c → Vendor__c | Lookup | — | Clear the value of this field | **Confirmed.** Maintenance history should be preserved even if a vendor is removed from the system — ruled out Master-Detail specifically because cascading delete would destroy that history, which was deemed undesirable independent of any other consideration (e.g., trigger-timing arguments were raised and correctly dismissed as not the deciding factor). |
 
-### Correction made during original data-model design (worth Cursor knowing, not re-teaching from scratch)
+### Correction made during original data-model design (worth keeping, not re-teaching from scratch)
 An early framing suggested trigger-timing ("if a trigger assigns the vendor after creation, can the field be required-at-save Master-Detail?") was the deciding factor for the Vendor relationship type. This was **correctly challenged by the developer** — a `before insert` trigger actually *can* populate a field before save, so trigger timing alone doesn't rule out Master-Detail. The **actual** deciding factor was the "preserve history on delete" business requirement, not trigger timing. This is a good example of the developer's reasoning catching a flawed premise — see `LEARNING_PROFILE.md`.
 
 ---

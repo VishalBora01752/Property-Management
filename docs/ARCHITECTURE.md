@@ -2,7 +2,7 @@
 
 ## Current State
 
-The **data model** is complete in the org and in `force-app`. **Apex (WIP):** `PropertyController` — `getProperties` with `LIMIT 25` / `OFFSET` and a null/`< 1` page guard; `ping` still present. **LWC (WIP):** `propertyList` loads page 1 imperatively; HTML row-count binding not finished; not on an App Page yet. **No** create-with-image LWC, filters, triggers, flows, or tests.
+The **data model** is complete in the org and in `force-app`. **Apex:** `getProperties` (dynamic SOQL, filters, pagination) and `createProperty` (require ≥1 file, insert Property + ContentVersion). **Tests:** `PropertyControllerTest` (list + create). **LWC:** `propertyList` (filters, Next/Previous, datatable); `propertyCreate` (form + Files). **No** triggers or flows yet.
 
 ## Guiding Principle
 

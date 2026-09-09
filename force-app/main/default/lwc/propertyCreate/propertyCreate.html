@@ -1,0 +1,57 @@
+<template>yo
+    <lightning-input type="text" label="Name" onchange={handleNameInput}></lightning-input>
+    <lightning-input type="number" label="Rent" onchange={handleRentInput}></lightning-input>
+    <lightning-input type="text" label="Address" onchange={handleAddressInput}></lightning-input>
+    <lightning-input type="text" label="City" onchange={handleCityInput}></lightning-input>
+    <lightning-input type="text" label="State" onchange={handleStateInput}></lightning-input>
+    <lightning-input type="text" label="Postal Code" onchange={handlePostalCodeInput}></lightning-input>
+    <lightning-input type="text" label="Country" onchange={handleCountryInput}></lightning-input>
+    <lightning-textarea 
+        label="Description" 
+        value={description} 
+        placeholder="Type your text here..."
+        onchange={handleDescriptionInput}>
+    </lightning-textarea>
+    <lightning-combobox
+        name="Type"
+        label="Type"
+        placeholder="Choose type of Property"
+        value={type}
+        options={typeOptions}
+        onchange={handleTypeChange}>
+    </lightning-combobox>
+    <lightning-combobox
+        name="furnishing_status"
+        label="Furnishing Status"
+        placeholder="Choose Furnishing"
+        value={furnishing}
+        options={furnishingStatusOptions}
+        onchange={handleFurnishingStatusChange}>
+    </lightning-combobox>
+    <lightning-combobox
+        name="status"
+        label="Status"
+        placeholder="Choose Status"
+        value={availability}
+        options={statusOptions}
+        onchange={handleStatusChange}>
+    </lightning-combobox>
+    <lightning-input
+        type="file"
+        label="Upload Property Images"
+        multiple
+        onchange={handleFileChange}>
+    </lightning-input>
+
+    <p><strong> Files selected: {files.length} </strong></p>
+
+    <lightning-button 
+            label="Save" 
+            variant="brand" 
+            icon-name="utility:save"
+            onclick={handleSave}>
+    </lightning-button>
+
+    <p>{errorMessage}</p>
+
+</template>

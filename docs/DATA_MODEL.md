@@ -1,6 +1,6 @@
 # DATA_MODEL.md — Current Data Model (Completed)
 
-Status: **✅ Complete.** All 5 objects, all fields, all relationships, and all 3 required validation rules have been built in the Developer Edition org via Setup UI (no code/metadata deploy yet — see `NEXT_SESSION.md` for pulling this into source control).
+Status: **✅ Complete.** Objects live in the org and in `force-app`. Apex/LWC/Flow/trigger exist separately (see `ARCHITECTURE.md`).
 
 Every decision below is classified as:
 - **Confirmed** — reasoned through, implemented, and understood well enough to defend.
@@ -30,7 +30,7 @@ Every decision below is classified as:
 | Description__c | Long Text Area | N/A (see below) | Cannot use Required checkbox — enforced via Validation Rule `Description_Required` (`ISBLANK(Description__c)`). |
 | Tenant__c | Lookup → Tenant__c | No | See Relationship section below. |
 
-**Images:** Deliberately **no custom field**. Uses standard Salesforce Files (ContentDocument/ContentVersion/ContentDocumentLink). **Requires validation / open gap:** "at least one file required" has no enforcement mechanism yet — Files have no Required checkbox and can't be checked by a standard Validation Rule. Decision: this will be enforced in **Apex**, inside the Property Create LWC's save-handling method, checking for ≥1 uploaded file before allowing insert. **As of handover, this Apex does not exist — this is a real functional gap, not a completed safeguard.**
+**Images:** Standard Salesforce Files. **D010:** `createProperty` throws if no files, then inserts Property + ContentVersion (`FirstPublishLocationId`). Enforced on the LWC path only — standard New does not require Files.
 
 ---
 
@@ -89,7 +89,7 @@ Every decision below is classified as:
 | Property__c | **Master-Detail** → Property__c | Yes (implicit) |
 | Vendor__c | **Lookup** → Vendor__c | No |
 
-**Confirmed business rule (not yet implemented in code):** For vendor auto-assignment "least workload" logic, only **Open** and **In Progress** requests count toward a vendor's workload. Cancelled and Completed are both excluded — reasoning: neither represents active outstanding work for the vendor.
+**Confirmed business rule (implemented in `MaintenanceRequestTriggerHandler`, tests not green):** For vendor auto-assignment, only **Open** and **In Progress** count. Tie-break: Vendor Name alphabetical.
 
 ---
 
@@ -125,4 +125,4 @@ Master-Detail relationships (Lease Agreement, Maintenance Request → Property) 
 
 ## Formula Fields for Lease Expiry — Not Yet Decided
 
-No formula field currently calculates "days until lease expiry" or similar. The 30-day-prior email logic has been conceptually assigned to Scheduled Apex (or Scheduled Flow) checking `End_Date__c == TODAY() + 30` daily, but this is unimplemented and the exact mechanism (Scheduled Apex vs. Scheduled Flow) is still an open architectural choice — see `ARCHITECTURE.md`.
+No formula field currently calculates "days until lease expiry." The 30-day email is **D019/D020** Scheduled Apex: `End_Date__c = TODAY()+30`. Roll-ups for dashboards still open.

@@ -2,7 +2,7 @@
 
 ## Current State
 
-The **data model** is complete in the org and in `force-app`. **Apex:** `getProperties` (dynamic SOQL, filters, pagination) and `createProperty` (require ≥1 file, insert Property + ContentVersion). **Tests:** `PropertyControllerTest` (list + create). **LWC:** `propertyList` (filters, Next/Previous, datatable); `propertyCreate` (form + Files). **No** triggers or flows yet.
+The **data model** is complete in the org and in `force-app`. **Apex:** `PropertyController` (list + create with Files); `LeaseExpiryReminder` (Schedulable email); `MaintenanceRequestTriggerHandler` (before insert assign). **Tests:** `PropertyControllerTest`; `LeaseExpiryReminderTest` (passed); `MaintenanceRequestTriggerHandlerTest` (failing). **LWC:** `propertyList`, `propertyCreate`. **Flow:** tenant-assignment Task (D018). **Trigger:** `MaintenanceRequestTrigger` before insert. **Open:** Phase 7 test/bulk; reports; roll-ups; sharing.
 
 ## Guiding Principle
 
@@ -29,7 +29,7 @@ Prefer the simplest maintainable solution that demonstrates appropriate Salesfor
 - Custom Metadata Types — no configuration-driven behavior identified that would need this yet.
 
 ## Open Architectural Questions (Not Yet Decided — Do Not Assume)
-1. **Flow vs. Apex Trigger for the tenant-assignment Task creation** — leaning Flow, but not finalized. This is a good first "why did you choose X over Y" defense conversation to have explicitly with the developer before building it.
-2. **Scheduled Apex vs. Scheduled Flow for the lease-reminder email** — leaning Apex, not finalized.
-3. **Whether Roll-Up Summary fields get added** to reduce dashboard/reporting SOQL complexity (see `DATA_MODEL.md`).
-4. **Sharing model** — no sharing rules, OWD settings, or profile/permission-set design has been discussed at all yet. This is a full gap, not a decision — must be covered before/during the security-testing portion of assessment defense prep.
+1. **Flow vs Apex Trigger for tenant Task** — **decided D018 Flow.** Do not re-open unless they ask.
+2. **Scheduled Apex vs Scheduled Flow for lease email** — **decided D019 Apex.**
+3. **Whether Roll-Up Summary fields get added** for reporting (see `DATA_MODEL.md`).
+4. **Sharing model** — still a full gap (OWD, sharing rules, profiles/FLS).

@@ -121,7 +121,7 @@ An early framing suggested trigger-timing ("if a trigger assigns the vendor afte
 
 ## Formula Fields / Roll-Up Summaries — Not Yet Decided
 
-Master-Detail relationships (Lease Agreement, Maintenance Request → Property) technically enable Roll-Up Summary fields on Property (e.g., "Active Lease Count," "Total Lease Value," "Open Maintenance Request Count"). **These have not been created and no decision has been made on whether they're needed.** This should be revisited when the Reporting/Dashboard phase is reached — it may reduce the amount of custom Apex/SOQL needed for the dashboard.
+Master-Detail technically enables Roll-Up Summaries on Property. **D022: not created.** Occupancy and MR-by-status use standard reports.
 
 ## Formula Fields for Lease Expiry — Not Yet Decided
 

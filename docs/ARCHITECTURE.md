@@ -2,7 +2,7 @@
 
 ## Current State
 
-The **data model** is complete in the org and in `force-app`. **Apex:** `PropertyController` (list + create with Files); `LeaseExpiryReminder` (Schedulable email); `MaintenanceRequestTriggerHandler` (before insert assign). **Tests:** `PropertyControllerTest`; `LeaseExpiryReminderTest` (passed); `MaintenanceRequestTriggerHandlerTest` (failing). **LWC:** `propertyList`, `propertyCreate`. **Flow:** tenant-assignment Task (D018). **Trigger:** `MaintenanceRequestTrigger` before insert. **Open:** Phase 7 test/bulk; reports; roll-ups; sharing.
+The **data model**, Apex, LWC, Flow, trigger, tests, and **standard reports/dashboard** are in the org and (except recording/zip) in Git. **Org-wide coverage 93%** (2026-09-17 run). **Open:** Phase 10 bulk write-up; sharing; zip; recording; defense. Roll-ups **not used** (D022).
 
 ## Guiding Principle
 
@@ -31,5 +31,5 @@ Prefer the simplest maintainable solution that demonstrates appropriate Salesfor
 ## Open Architectural Questions (Not Yet Decided — Do Not Assume)
 1. **Flow vs Apex Trigger for tenant Task** — **decided D018 Flow.** Do not re-open unless they ask.
 2. **Scheduled Apex vs Scheduled Flow for lease email** — **decided D019 Apex.**
-3. **Whether Roll-Up Summary fields get added** for reporting (see `DATA_MODEL.md`).
+3. **Roll-Up Summaries for reporting** — **decided D022: not added.** Occupancy uses Property Status reports.
 4. **Sharing model** — still a full gap (OWD, sharing rules, profiles/FLS).

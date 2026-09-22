@@ -14,7 +14,7 @@ export default class PropertyList extends LightningElement {
     fetchingPropDetails() {
         getProperties({pageNumber: this.pageNumber, maxRent: this.maxRent, status: this.availability, furnishing: this.furnishing})
             .then(result => {this.properties = result;})
-            .catch(error => {console.error('Error we got here:',error);})
+            .catch(error => {console.error('Error we got here:',error);});
     }
 
     handleNext() {

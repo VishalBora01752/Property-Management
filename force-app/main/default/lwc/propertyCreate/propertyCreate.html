@@ -1,57 +1,97 @@
-<template>yo
-    <lightning-input type="text" label="Name" onchange={handleNameInput}></lightning-input>
-    <lightning-input type="number" label="Rent" onchange={handleRentInput}></lightning-input>
-    <lightning-input type="text" label="Address" onchange={handleAddressInput}></lightning-input>
-    <lightning-input type="text" label="City" onchange={handleCityInput}></lightning-input>
-    <lightning-input type="text" label="State" onchange={handleStateInput}></lightning-input>
-    <lightning-input type="text" label="Postal Code" onchange={handlePostalCodeInput}></lightning-input>
-    <lightning-input type="text" label="Country" onchange={handleCountryInput}></lightning-input>
-    <lightning-textarea 
-        label="Description" 
-        value={description} 
-        placeholder="Type your text here..."
-        onchange={handleDescriptionInput}>
-    </lightning-textarea>
-    <lightning-combobox
-        name="Type"
-        label="Type"
-        placeholder="Choose type of Property"
-        value={type}
-        options={typeOptions}
-        onchange={handleTypeChange}>
-    </lightning-combobox>
-    <lightning-combobox
-        name="furnishing_status"
-        label="Furnishing Status"
-        placeholder="Choose Furnishing"
-        value={furnishing}
-        options={furnishingStatusOptions}
-        onchange={handleFurnishingStatusChange}>
-    </lightning-combobox>
-    <lightning-combobox
-        name="status"
-        label="Status"
-        placeholder="Choose Status"
-        value={availability}
-        options={statusOptions}
-        onchange={handleStatusChange}>
-    </lightning-combobox>
-    <lightning-input
-        type="file"
-        label="Upload Property Images"
-        multiple
-        onchange={handleFileChange}>
-    </lightning-input>
+<template>
+    <lightning-card title="Add New Property" icon-name="standard:home">
 
-    <p><strong> Files selected: {files.length} </strong></p>
+        <div class="slds-p-horizontal_medium">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="Name" onchange={handleNameInput}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="number" label="Rent" onchange={handleRentInput}></lightning-input>
+                </lightning-layout-item>
 
-    <lightning-button 
-            label="Save" 
-            variant="brand" 
-            icon-name="utility:save"
-            onclick={handleSave}>
-    </lightning-button>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="Address" onchange={handleAddressInput}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="City" onchange={handleCityInput}></lightning-input>
+                </lightning-layout-item>
 
-    <p>{errorMessage}</p>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="State" onchange={handleStateInput}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="Postal Code" onchange={handlePostalCodeInput}></lightning-input>
+                </lightning-layout-item>
 
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" label="Country" onchange={handleCountryInput}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-combobox
+                        name="Type"
+                        label="Type"
+                        placeholder="Choose type of Property"
+                        value={type}
+                        options={typeOptions}
+                        onchange={handleTypeChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-combobox
+                        name="furnishing_status"
+                        label="Furnishing Status"
+                        placeholder="Choose Furnishing"
+                        value={furnishing}
+                        options={furnishingStatusOptions}
+                        onchange={handleFurnishingStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-combobox
+                        name="status"
+                        label="Status"
+                        placeholder="Choose Status"
+                        value={availability}
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="around-small">
+                    <lightning-textarea
+                        label="Description"
+                        value={description}
+                        placeholder="Type your text here..."
+                        onchange={handleDescriptionInput}>
+                    </lightning-textarea>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="around-small">
+                    <lightning-input
+                        type="file"
+                        label="Upload Property Images"
+                        multiple
+                        onchange={handleFileChange}>
+                    </lightning-input>
+                    <p class="slds-text-body_small slds-m-top_x-small">Files selected: {files.length}</p>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-m-vertical_small">{errorMessage}</div>
+            </template>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Save"
+                    variant="brand"
+                    icon-name="utility:save"
+                    onclick={handleSave}>
+                </lightning-button>
+            </div>
+        </div>
+
+    </lightning-card>
 </template>

@@ -1,34 +1,49 @@
 <template>
+    <lightning-card title="Properties" icon-name="standard:real_estate">
 
-    <lightning-input type="number" label="Max rent" onchange={handlePriceChange}></lightning-input>
-    
-    <lightning-combobox
-        name="status"
-        label="Status"
-        placeholder="Choose Status"
-        value={availability}
-        options={statusOptions}
-        onchange={handleStatusChange}>
-    </lightning-combobox>
-    <lightning-combobox
-        name="furnishing_status"
-        label="Furnishing Status"
-        placeholder="Choose Furnishing"
-        value={furnishing}
-        options={furnishingStatusOptions}
-        onchange={handleFurnishingStatusChange}>
-    </lightning-combobox>
+        <div class="slds-p-horizontal_medium">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="4" padding="around-small">
+                    <lightning-input type="number" label="Max Rent" onchange={handlePriceChange}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" padding="around-small">
+                    <lightning-combobox
+                        name="status"
+                        label="Status"
+                        placeholder="Any"
+                        value={availability}
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" padding="around-small">
+                    <lightning-combobox
+                        name="furnishing_status"
+                        label="Furnishing Status"
+                        placeholder="Any"
+                        value={furnishing}
+                        options={furnishingStatusOptions}
+                        onchange={handleFurnishingStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
 
-    <p>{properties.length}</p>
-    
-    <lightning-datatable
-        data={properties}
-        columns={columns}
-        key-field="Id"
-        hide-checkbox-column="true">
-    </lightning-datatable>
+            <p class="slds-text-body_small slds-m-vertical_small">
+                Showing {properties.length} properties
+            </p>
 
-    <lightning-button label="Previous" onclick={handlePrevious}></lightning-button>
-    <lightning-button label="Next" onclick={handleNext}></lightning-button>
+            <lightning-datatable
+                data={properties}
+                columns={columns}
+                key-field="Id"
+                hide-checkbox-column>
+            </lightning-datatable>
 
+            <div class="slds-m-top_medium slds-grid slds-grid_align-spread">
+                <lightning-button label="Previous" onclick={handlePrevious}></lightning-button>
+                <lightning-button label="Next" onclick={handleNext} variant="brand"></lightning-button>
+            </div>
+        </div>
+
+    </lightning-card>
 </template>

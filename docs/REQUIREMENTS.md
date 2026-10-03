@@ -1,6 +1,6 @@
-# REQUIREMENTS.md — Business Requirements Only
+# REQUIREMENTS.md — Product scope
 
-**Rule for this document:** this file contains *only* what the assessment explicitly requires. It does not contain how we chose to implement anything — see `ARCHITECTURE.md` and `DECISION_LOG.md` for that. Where the assessment doesn't specify something, it is marked as an **Assumption** or **Open Question**, not silently decided here.
+What this app is meant to do. Implementation choices live in `ARCHITECTURE.md` and the data model in `DATA_MODEL.md`. Product decisions that were not obvious from the feature list are at the bottom.
 
 ---
 
@@ -37,10 +37,10 @@
 - Phone Number
 - Email
 
-### Assumption (stated in original spec)
+### Product rule
 > A tenant can rent multiple properties.
 
-### Requirements
+### Behavior
 - List view for tenants.
 - **When a property is assigned to a tenant, automatically create a Task to generate the lease agreement.**
 
@@ -54,10 +54,10 @@
 - Start Date
 - End Date
 
-### Assumption (stated in original spec)
+### Product rule
 > A lease agreement is related to only one property.
 
-### Requirements
+### Behavior
 - Provision to list and create lease agreements.
 - **Send an automated email 1 month before the lease agreement's end date, to the tenant.**
 
@@ -80,7 +80,7 @@
 - Status — Open / In Progress / Completed / Cancelled
 - Description
 
-### Requirements
+### Behavior
 - **When a maintenance request is created, automatically assign it to the vendor with the least assigned workload.**
 
 ---
@@ -94,26 +94,25 @@ Generate a dashboard showing:
 
 ---
 
-## 7. Non-Functional Requirements
+## 7. Quality bar
 
-1. The system should handle bulk data efficiently.
-2. All functionality should be covered by unit tests with a minimum of 80% coverage.
-3. Commit changes to version control and share a zip of the repository.
-4. Share a screen recording of the working app.
+1. Automation should be bulk-safe.
+2. Apex covered by unit tests (target at least 80% on project classes).
+3. Source lives in Git.
 
 ---
 
-## Assumptions Not Explicitly Stated by the Assessment
+## Assumptions
 
-These are things the business requirements don't specify, which the project has needed to decide on independently (see `DECISION_LOG.md` for the actual decisions made):
+These needed a product decision (see the data model and architecture docs):
 
 - Whether a Property can exist without a Tenant assigned (vacancy).
-- What "least assigned workload" means precisely for vendor auto-assignment (e.g., does it count all requests ever, or only currently active ones?).
+- What "least assigned workload" means for vendor auto-assignment (e.g. all requests ever vs currently active).
 - What should happen to a Maintenance Request if its Vendor is deleted.
 - What should happen to a Property's Lease Agreements / Maintenance Requests if the Property itself is deleted.
-- Who the lease-expiry reminder email is sent to (assumed: the tenant, but this is not explicitly stated in the spec and should be confirmed/flagged during defense).
+- Who receives the lease-expiry reminder (this app emails the tenant).
 
-## Open Questions (Not Yet Decided)
+## Later decisions
 
-- Should Roll-Up Summary fields (e.g., total lease value, count of active leases per property) be added to support the dashboard/reporting requirements, or will reports/SOQL alone suffice?
-- Exact recipient(s) of the lease-expiry email — tenant only, or also an internal user/queue?
+- Occupancy and maintenance-by-status use standard reports; roll-up summaries were not added.
+- Lease reminder email goes to the tenant on the related Property.

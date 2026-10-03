@@ -3,9 +3,9 @@
 Status: **✅ Complete.** Objects live in the org and in `force-app`. Apex/LWC/Flow/trigger exist separately (see `ARCHITECTURE.md`).
 
 Every decision below is classified as:
-- **Confirmed** — reasoned through, implemented, and understood well enough to defend.
-- **Requires validation** — implemented, but worth re-testing understanding of, or reconsidering technically.
-- **Not yet decided** — genuinely open.
+- **Confirmed** — reasoned through and implemented.
+- **Requires validation** — implemented, but worth re-checking.
+- **Not yet decided** — still open.
 
 ---
 
@@ -89,7 +89,7 @@ Every decision below is classified as:
 | Property__c | **Master-Detail** → Property__c | Yes (implicit) |
 | Vendor__c | **Lookup** → Vendor__c | No |
 
-**Confirmed business rule (implemented in `MaintenanceRequestTriggerHandler`, tests not green):** For vendor auto-assignment, only **Open** and **In Progress** count. Tie-break: Vendor Name alphabetical.
+**Confirmed business rule (implemented in `MaintenanceRequestTriggerHandler`):** For vendor auto-assignment, only **Open** and **In Progress** count. Tie-break: Vendor Name alphabetical.
 
 ---
 
@@ -103,7 +103,7 @@ Every decision below is classified as:
 | Maintenance_Request__c → Vendor__c | Lookup | — | Clear the value of this field | **Confirmed.** Maintenance history should be preserved even if a vendor is removed from the system — ruled out Master-Detail specifically because cascading delete would destroy that history, which was deemed undesirable independent of any other consideration (e.g., trigger-timing arguments were raised and correctly dismissed as not the deciding factor). |
 
 ### Correction made during original data-model design (worth keeping, not re-teaching from scratch)
-An early framing suggested trigger-timing ("if a trigger assigns the vendor after creation, can the field be required-at-save Master-Detail?") was the deciding factor for the Vendor relationship type. This was **correctly challenged by the developer** — a `before insert` trigger actually *can* populate a field before save, so trigger timing alone doesn't rule out Master-Detail. The **actual** deciding factor was the "preserve history on delete" business requirement, not trigger timing. This is a good example of the developer's reasoning catching a flawed premise — see `LEARNING_PROFILE.md`.
+An early framing suggested trigger-timing ("if a trigger assigns the vendor after creation, can the field be required-at-save Master-Detail?") was the deciding factor for the Vendor relationship type. This was **correctly challenged by the developer** — a `before insert` trigger actually *can* populate a field before save, so trigger timing alone doesn't rule out Master-Detail. The **actual** deciding factor was the "preserve history on delete" business requirement, not trigger timing. This is a good example of catching a flawed premise: trigger timing does not decide Lookup vs Master-Detail; delete/history does.
 
 ---
 

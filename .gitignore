@@ -47,19 +47,14 @@ $RECYCLE.BIN/
 **/.venv/
 **/venv/
 
-# Mentor / study files (on disk only). Requirements, data model, and architecture are NOT ignored.
+# Local editor config
 .cursor/
-docs/ASSESSMENT_DEFENSE.md
-docs/CURSOR_MASTER_PROMPT.md
-docs/CURSOR_RULES.md
-docs/CURSOR_SETUP.md
-docs/DECISION_LOG.md
-docs/HANDOVER.md
-docs/KNOWLEDGE_LEDGER.md
-docs/LEARNING_PROFILE.md
-docs/NEXT_SESSION.md
-docs/PROJECT_PLAN.md
-docs/SESSION_LOG.md
-docs/session-logs/
-docs/study-logs/
+
+# Private notes (keep REQUIREMENTS, DATA_MODEL, ARCHITECTURE, and screenshots)
+docs/*
+!docs/REQUIREMENTS.md
+!docs/DATA_MODEL.md
+!docs/ARCHITECTURE.md
+!docs/screenshots/
+!docs/screenshots/**
 
